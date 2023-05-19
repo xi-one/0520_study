@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crypto front-end</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Crypto front-end</h1>
+
+    <button type="button" id="txButton">Connect MetaMask Wallet</button>
+
+    <form>
+      <label for="address">Input receiver address:</label>
+      <input type="text" id="address">
+      <br>
+
+      <label for="nftUri">Input your NFT URI:</label>
+      <input type="text" id="nftUri">
+
+      <button type="button" id="mintingButton">Mint</button>
+
+      <div id="txStatus"></div>
+
+      <label for="check owner">Input NFT Token ID:</label>
+      <input type="text" id="checkID">
+
+      <button type="button" id="checkButton">Check</button>
+      <div id="checkOwner"></div>
+    </form>
+
+    <div id="txStatus"></div>
+  </div>
+
+  <script language="javascript" type="text/javascript" src="web3.min.js"></script>
+  <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script language="javascript" type="text/javascript" src="contract_info.js"></script>
+  <script>
+    // JavaScript code here...
+    let user_account;
+    let web3js;
+    let contract;
+
+    async function connectWallet() {
+      if (window.ethereum) {
+          web3js = new Web3(window.ethereum);
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }); // 연결 계정 선택 
+          user_account = accounts[0]
+          console.log(web3js);
+
+
+
+          // button action
+          $( "#txButton" ).css("background-color", "transparent");
+          $( "#txButton" ).css("color", "black");
+          $( "#txButton" ).css("cursor", "Default");
+          $( "#txButton" ).text("current account: " + user_account)
+          
+        } else {
+          // Handle the case where the user doesn't have Metamask installed
+          // Probably show them a message prompting them to install Metamask
+          console.log("test");
+        }
+    }
+
+    function mint(address, uri) {
+      let tokenId;
+    
+      /*
+        Write your mint code...
+
+
+
+      */
+      $("#txStatus").text("tokenId: " + tokenId);
+    }
+
+    async function ownerOf(id){
+      let owner;
+
+      /*
+        Write your checking owner code...
+
+
+
+      */
+      return owner;
+    }
+
+    
+
+    $( "#txButton" ).on( "click", async function() {
+      await connectWallet();
+    });
+
+    $( "#mintingButton" ).on( "click", function() {
+      const addr = $("#address").val();
+      const uri = $("#nftUri").val();
+      mint(addr, uri);
+      
+    });
+
+    $( "#checkButton" ).on( "click", async function() {
+      const id = $("#checkID").val();
+      const owner = await ownerOf(id)
+      $("#checkOwner").text("owner address: " + owner);
+
+    });
+
+
+  </script>
+</body>
+</html>
