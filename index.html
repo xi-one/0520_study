@@ -43,25 +43,18 @@
     let contract;
 
     async function connectWallet() {
-      if (window.ethereum) {
-          web3js = new Web3(window.ethereum);
-          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }); // 연결 계정 선택 
-          user_account = accounts[0]
-          console.log(web3js);
+      /*
+        Write connecting wallet code...
+      
 
-
+        
+      */
 
           // button action
           $( "#txButton" ).css("background-color", "transparent");
           $( "#txButton" ).css("color", "black");
           $( "#txButton" ).css("cursor", "Default");
           $( "#txButton" ).text("current account: " + user_account)
-          
-        } else {
-          // Handle the case where the user doesn't have Metamask installed
-          // Probably show them a message prompting them to install Metamask
-          console.log("test");
-        }
     }
 
     function mint(address, uri) {
